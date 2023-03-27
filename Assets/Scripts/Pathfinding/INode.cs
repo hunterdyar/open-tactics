@@ -7,6 +7,6 @@ namespace NavigationTiles.Pathfinding
 	{
 		public bool Walkable { get; }
 		public int WalkCost {get;}
-		public Vector3Int NavPosition { get; }
+		public Vector3Int GridPosition { get; }
 	}
 }

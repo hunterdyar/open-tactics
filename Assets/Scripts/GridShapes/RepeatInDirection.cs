@@ -49,7 +49,7 @@ namespace NavigationTiles.GridShapes
 
 			for (int i = 0; i < maxRepeats; i++)
 			{
-				var nextPos = last.NavPosition + (Vector3Int)offset;
+				var nextPos = last.GridPosition + (Vector3Int)offset;
 				if (navigation.TryGetNavNode(nextPos, out last))
 				{
 					//if we ignore non-walkable or must be walkable

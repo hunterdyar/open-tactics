@@ -72,7 +72,7 @@ namespace NavigationTiles.Pathfinding
 		//overload for convenience
 		public virtual int Heuristic(INode a, INode b, int stepUpLayerCost = 1)
 		{
-			return Heuristic(a.NavPosition, b.NavPosition,stepUpLayerCost);
+			return Heuristic(a.GridPosition, b.GridPosition,stepUpLayerCost);
 		}
 
 		//Manhattan Distance. StepCost is multiplier for going up or down on z.

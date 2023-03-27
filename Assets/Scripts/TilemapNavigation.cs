@@ -44,15 +44,7 @@ namespace NavigationTiles
 			_tilemap = GetComponent<Tilemap>();
 			InitiateNavMap();
 			InitiateEntityMaps();
-			//We can select different pathfinders.
-			if (Grid.cellLayout == GridLayout.CellLayout.Hexagon)
-			{
-				_pathfinder = new AstarHexPathfinder<NavNode>(this);
-			}
-			else
-			{
-				_pathfinder = new AStarPathfinder<NavNode>(this);
-			}
+			_pathfinder = new AStarPathfinder<NavNode>(this);
 		}
 
 		private void InitiateEntityMaps()
@@ -77,51 +69,9 @@ namespace NavigationTiles
 				{
 					//we use grid cellposition for rectangular and isometric maps, but for hex, we convert to Cube.
 					//This makes all the math and pathfinding much easier, at the inconvenience of these wrapper functions to do the conversion when needed.
-					var loc = GridCellToNavCell(location);
-					_navMap.Add(loc, new NavNode(tile, loc, this));
+					_navMap.Add(location, new NavNode(tile, location, this));
 				}
 			}
-		}
-
-		/// <summary>
-		/// This is only necessary when using hex grids.
-		/// </summary>
-		public Vector3Int GridCellToNavCell(Vector3Int location)
-		{
-			if (_tilemap.cellLayout == GridLayout.CellLayout.Hexagon)
-			{
-				if (_tilemap.cellSwizzle == GridLayout.CellSwizzle.XYZ)
-				{
-					//Unity is using Pointy Top, which uses offset odd-row coords. We will use Cube coordinates.
-					return HexUtility.OddRToCube(location);
-				}
-				else if (_tilemap.cellSwizzle == GridLayout.CellSwizzle.YXZ)
-				{
-					//Unity is using Flat Top, which uses offset odd-col coords. Again, we will use cube for both cases.
-					return HexUtility.OddQToCube(location);
-				}
-			}
-
-			return location;
-		}
-
-		public Vector3Int NavCellToGridCell(Vector3Int location)
-		{
-			if (_tilemap.cellLayout == GridLayout.CellLayout.Hexagon)
-			{
-				if (_tilemap.cellSwizzle == GridLayout.CellSwizzle.XYZ)
-				{
-					//Unity is using Pointy Top, which uses offset odd-row coords. We will use Cube coordinates.
-					return HexUtility.CubeToOddR(location);
-				}
-				else if (_tilemap.cellSwizzle == GridLayout.CellSwizzle.YXZ)
-				{
-					//Unity is using Flat Top, which uses offset odd-col coords. Again, we will use cube for both cases.
-					return HexUtility.CubeToOddQ(location);
-				}
-			}
-
-			return location;
 		}
 		public INode[] GetNeighborNodes(INode node, bool walkableOnly = true)
 		{
@@ -129,8 +79,6 @@ namespace NavigationTiles
 			{
 				case GridConnectionType.FlatCardinalAndDiagonal:
 					return GetNeighborNodesUsingDirectionList(node, RectUtility.CardinalAndDiagonalDirections, walkableOnly);
-				case GridConnectionType.Hexagonal:
-					return GetNeighborNodesUsingDirectionList(node, HexUtility.CubeHexDirections, walkableOnly);
 				case GridConnectionType.FlatCardinal:
 				default:
 					return GetNeighborNodesUsingDirectionList(node, RectUtility.CardinalDirections, walkableOnly);
@@ -143,7 +91,7 @@ namespace NavigationTiles
 			int n = 0;
 			foreach (var dir in directions)
 			{
-				if (_navMap.TryGetValue(node.NavPosition + dir, out var neighbor))
+				if (_navMap.TryGetValue(node.GridPosition + dir, out var neighbor))
 				{
 					if (!walkableOnly || node.Walkable)
 					{
@@ -207,20 +155,13 @@ namespace NavigationTiles
 
 		public NavTile GetNavTile(Vector3Int gridCellPosition)
 		{
-			if (_connectionType != GridConnectionType.Hexagonal)
-			{
-				return _tilemap.GetTile<NavTile>(GridCellToNavCell(gridCellPosition));
-			}
-			else
-			{
-				return _tilemap.GetTile<NavTile>(gridCellPosition);
-			}
+			return _tilemap.GetTile<NavTile>(gridCellPosition);
 		}
 
 
 		public bool TryGetNavNodeAtWorldPos(Vector3 worldPos, out NavNode node)
 		{
-			var pos = GridCellToNavCell(Grid.WorldToCell(worldPos));
+			var pos = Grid.WorldToCell(worldPos);
 			return TryGetNavNode(pos, out node);
 		}
 
@@ -229,9 +170,9 @@ namespace NavigationTiles
 			return _navMap.TryGetValue(gridCellPosition, out node);
 		}
 
-		public NavNode GetNavNode(Vector3Int gridCellPosition)
+		public NavNode GetNavNode(Vector3Int gridPosition)
 		{
-			if (_navMap.TryGetValue(GridCellToNavCell(gridCellPosition), out var node))
+			if (_navMap.TryGetValue(gridPosition, out var node))
 			{
 				return node;
 			}

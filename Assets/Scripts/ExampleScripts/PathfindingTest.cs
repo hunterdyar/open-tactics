@@ -26,7 +26,7 @@ namespace Nav_Tiles.Scripts.Example
 			{
 				if (startNode != null)
 				{
-					_navigation.Tilemap.SetColor(startNode.TilemapPosition, startNode.NavTile.color);
+					_navigation.Tilemap.SetColor(startNode.GridPosition, startNode.NavTile.color);
 				}
 
 				startNode = _navigation.GetNavNode(hover);
@@ -39,14 +39,14 @@ namespace Nav_Tiles.Scripts.Example
 				//reset color
 				if (endNode != null)
 				{
-					_navigation.Tilemap.SetColor(endNode.TilemapPosition, endNode.NavTile.color);
+					_navigation.Tilemap.SetColor(endNode.GridPosition, endNode.NavTile.color);
 				}
 				
 				//set end to current hover
 				endNode = _navigation.GetNavNode(hover);
 				if (endNode != null)
 				{
-					_navigation.Tilemap.SetColor(endNode.TilemapPosition, Color.green);
+					_navigation.Tilemap.SetColor(endNode.GridPosition, Color.green);
 				}
 
 				//if we have start and end nodes.
@@ -66,18 +66,17 @@ namespace Nav_Tiles.Scripts.Example
 					//set all path colors
 					SetColors(Color.blue);
 					//set start and end
-					_navigation.Tilemap.SetColor(startNode.TilemapPosition, Color.magenta);
-					_navigation.Tilemap.SetColor(endNode.TilemapPosition, Color.green);
+					_navigation.Tilemap.SetColor(startNode.GridPosition, Color.magenta);
+					_navigation.Tilemap.SetColor(endNode.GridPosition, Color.green);
 				}
 			}
 		}
-
 		
 		private void SetColors(Color color)
 		{
 			foreach (var t in tiles)
 			{
-				_navigation.Tilemap.SetColor(((NavNode)t).TilemapPosition,color);
+				_navigation.Tilemap.SetColor(((NavNode)t).GridPosition,color);
 			}
 		}
 
@@ -86,7 +85,7 @@ namespace Nav_Tiles.Scripts.Example
 			foreach (var t in tiles)
 			{
 				var nt = (NavNode)t;
-				_navigation.Tilemap.SetColor(nt.TilemapPosition, nt.NavTile.color);
+				_navigation.Tilemap.SetColor(nt.GridPosition, nt.NavTile.color);
 			}
 		}
 	}

@@ -23,7 +23,7 @@ namespace NavigationTiles.GridShapes
 			List<NavNode> nodes = new List<NavNode>();
 			foreach (var offset in Shape)
 			{
-				if(navigation.TryGetNavNode(center.NavPosition+(Vector3Int)offset,out var node))
+				if(navigation.TryGetNavNode(center.GridPosition+(Vector3Int)offset,out var node))
 				{
 					nodes.Add(node);	
 				}

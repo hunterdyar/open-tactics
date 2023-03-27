@@ -28,7 +28,7 @@ namespace NavigationTiles.Entities
 		}
 		public bool TryMoveInDirection(Vector3Int direction)
 		{
-			if (TilemapNavigation.TryGetNavNode(_currentNode.NavPosition + direction,out var node))
+			if (TilemapNavigation.TryGetNavNode(_currentNode.GridPosition + direction,out var node))
 			{
 				if (node.Walkable && !_agentLayer.HasAnyEntity(node))
 				{
