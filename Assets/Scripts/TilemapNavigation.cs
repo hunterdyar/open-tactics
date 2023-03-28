@@ -4,6 +4,7 @@ using Tactics.Entities;
 using Tactics.Pathfinding;
 using Tactics.Utility;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
@@ -49,6 +50,10 @@ namespace Tactics
 
 		private void InitiateEntityMaps()
 		{
+			if (_entityMaps.Length == 0)
+			{
+				Debug.LogWarning("No entity maps configured in Tilemap Navigation",this);
+			}
 			foreach (var map in _entityMaps)
 			{
 				map.Initiate(this);

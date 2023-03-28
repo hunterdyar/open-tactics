@@ -42,12 +42,14 @@ namespace Tactics.Pathfinding
 		}
 		public abstract bool TryFindPath(T start, T end, out List<T> path);
 
-		public List<T> GetPath(T end)
+		protected List<T> GetPath(T end)
 		{
 			if (_pathStatus != PathStatus.PathFound)
 			{
 				return new List<T>();
 			}
+			
+			Assert.IsTrue(cameFrom.ContainsKey(end),"Pathfinding Failed, but PathStatus is not PathFound. Should not be trying to calculate path from current dictionary");
 			
 			var path = new List<T>();
 			var current = end;
