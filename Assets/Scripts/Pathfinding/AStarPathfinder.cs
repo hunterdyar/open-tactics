@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NavigationTiles.PriorityQueue;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
 namespace NavigationTiles.Pathfinding

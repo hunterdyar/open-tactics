@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NavigationTiles.Entities;
 using NavigationTiles.GridShapes;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace NavigationTiles.Highlight
 {
@@ -62,6 +63,7 @@ namespace NavigationTiles.Highlight
 
 		public void HighlightNode(NavNode node)
 		{
+			Assert.IsNotNull(node,"Can't call Highlight Node with null node.");
 			ClearCurrent();
 			foreach (var space in _shape.GetNodesOnTilemap(node, _map))
 			{

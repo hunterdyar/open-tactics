@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 #if UNITY_EDITOR
 using UnityEditorInternal;
 #endif
@@ -50,6 +51,9 @@ namespace NavigationTiles.Entities
 					Debug.LogWarning("Trying to add entity to map, but that entity is already on map somewhere else.");
 				}
 			}
+			
+			//Assert.IsFalse(_entities.ContainsValue(entity) && _entities.ContainsKey(node) && _entities[node] != entity, "Trying to add entity to map, but that entity is already on map somewhere else.");
+			
 			if (!_entities.ContainsKey(node))
 			{
 				_entities.Add(node,entity);
@@ -101,7 +105,6 @@ namespace NavigationTiles.Entities
 		{
 			RemoveEntity(entity);
 			AddEntityToMap(node,entity);
-			
 		}
 	}
 }

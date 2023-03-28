@@ -2,9 +2,6 @@
 
 namespace NavigationTiles.Entities
 {
-	//This is basically an example script. You should probably replace it with your own code, or steal what you need from it.
-	//But, for rapid prototyping or getting started, you probably SHOULD just use it.
-	//I basically waffled between putting it here or putting it in examples.
 	public class Agent : GridEntity
 	{
 		[SerializeField] private EntityMap _agentLayer;

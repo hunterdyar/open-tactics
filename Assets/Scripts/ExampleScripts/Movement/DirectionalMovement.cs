@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NavigationTiles.Entities;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace NavigationTiles.Examples
 {
