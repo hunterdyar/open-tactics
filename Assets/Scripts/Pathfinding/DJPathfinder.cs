@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using NavigationTiles.PriorityQueue;
+using Tactics.PriorityQueue;
 using UnityEngine;
 
-namespace NavigationTiles.Pathfinding
+namespace Tactics.Pathfinding
 {
 	//Dijkstra's Algorithm
 	public class DJPathfinder<T> : Pathfinder<T> where T : INode

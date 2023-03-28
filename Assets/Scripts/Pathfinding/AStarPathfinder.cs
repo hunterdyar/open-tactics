@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using NavigationTiles.PriorityQueue;
+using Tactics.PriorityQueue;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
-namespace NavigationTiles.Pathfinding
+namespace Tactics.Pathfinding
 {
 	/// <summary>
 	/// A* pathfinding using (by default) a manhattan distance Heuristic that works on any square (or square-ish) map.

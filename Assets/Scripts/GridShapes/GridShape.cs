@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using NavigationTiles.Utility;
+using Tactics.Utility;
 using UnityEditor;
 using UnityEngine;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 {
 	[CreateAssetMenu(fileName = "Grid Shape", menuName = "Nav Tiles/Shapes/Shape", order = 0)]
 	public class GridShape : ScriptableShape

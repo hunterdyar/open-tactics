@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NavigationTiles.PriorityQueue
+namespace Tactics.PriorityQueue
 {
     public class FastPriorityQueueNode
     {

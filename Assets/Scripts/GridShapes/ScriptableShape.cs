@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 { 
 	public abstract class ScriptableShape : ScriptableObject
 	{

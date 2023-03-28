@@ -3,7 +3,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace NavigationTiles.GridShapes.Editor
+namespace Tactics.GridShapes.Editor
 {
 	[CustomPropertyDrawer(typeof(ShapeFromSet))]
 	public class ShapeFromSetPropertyDrawer : PropertyDrawer

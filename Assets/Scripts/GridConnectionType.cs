@@ -1,4 +1,4 @@
-﻿namespace NavigationTiles
+﻿namespace Tactics
 {
 	public enum GridConnectionType
 	{

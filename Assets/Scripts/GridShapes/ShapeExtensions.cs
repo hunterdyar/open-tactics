@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 {
 	public static class ShapeExtensions
 	{

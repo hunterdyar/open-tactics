@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NavigationTiles.Utility
+namespace Tactics.Utility
 {
 	public static class RectUtility
 	{

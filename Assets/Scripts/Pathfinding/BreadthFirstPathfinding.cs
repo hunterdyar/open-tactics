@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NavigationTiles.Pathfinding
+namespace Tactics.Pathfinding
 {
 	/// <summary>
 	/// Because one would only bother using this if they wanted to do something _else_ with the pathfinding (use astar instead), I've given the CameFrom dictionary a getter, and removed the early-exit case.

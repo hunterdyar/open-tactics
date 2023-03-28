@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 using UnityEditorInternal;
 #endif
 
-namespace NavigationTiles.Entities
+namespace Tactics.Entities
 {
 	/// <summary>
 	/// An Entity Map is like a layer on top of the tilemap. It's a dictionary of entities and their positions.

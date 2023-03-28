@@ -1,4 +1,4 @@
-﻿namespace NavigationTiles
+﻿namespace Tactics
 {
 	public interface INavTile
 	{

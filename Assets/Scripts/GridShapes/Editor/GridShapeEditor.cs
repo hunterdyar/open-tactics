@@ -1,4 +1,4 @@
-﻿using NavigationTiles.GridShapes;
+﻿using Tactics.GridShapes;
 using UnityEditor;
 using UnityEngine;
 

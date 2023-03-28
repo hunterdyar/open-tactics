@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine.Assertions;
 
-namespace NavigationTiles.Pathfinding
+namespace Tactics.Pathfinding
 {
 	public abstract class Pathfinder<T> where T : INode
 	{

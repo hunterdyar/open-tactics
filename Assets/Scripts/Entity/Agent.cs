@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NavigationTiles.Entities
+namespace Tactics.Entities
 {
 	public class Agent : GridEntity
 	{

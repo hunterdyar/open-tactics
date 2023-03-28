@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using NavigationTiles;
+using Tactics;
 using UnityEngine.Tilemaps;
 #if UNITY_EDITOR
 using UnityEditor;

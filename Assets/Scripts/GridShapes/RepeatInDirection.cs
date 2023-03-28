@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 {
 	[CreateAssetMenu(fileName = "Repeat Offset Shape", menuName = "Nav Tiles/Shapes/Repeat Offset Shape", order = 5)]
 

@@ -1,4 +1,4 @@
-﻿using NavigationTiles.Entities;
+﻿using Tactics.Entities;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;

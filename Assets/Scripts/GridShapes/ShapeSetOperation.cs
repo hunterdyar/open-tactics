@@ -1,4 +1,4 @@
-﻿namespace NavigationTiles.GridShapes
+﻿namespace Tactics.GridShapes
 {
 	public enum ShapeSetOperation
 	{

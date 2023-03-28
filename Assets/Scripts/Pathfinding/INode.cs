@@ -1,7 +1,7 @@
 ﻿using Unity.VisualScripting;
 using UnityEngine;
 
-namespace NavigationTiles.Pathfinding
+namespace Tactics.Pathfinding
 {
 	public interface INode
 	{

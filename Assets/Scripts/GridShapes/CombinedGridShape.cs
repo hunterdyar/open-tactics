@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 {
 	[CreateAssetMenu(fileName = "Combined Grid Shape", menuName = "Nav Tiles/Shapes/Combined Shape", order = 0)]
 	public class CombinedGridShape : ScriptableShape

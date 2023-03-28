@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace NavigationTiles.Entities
+namespace Tactics.Entities
 {
 	/// <summary>
 	/// Access point to spawning the same entity prefab on an entity map.

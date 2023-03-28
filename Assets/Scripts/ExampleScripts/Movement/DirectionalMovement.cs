@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using NavigationTiles.Entities;
+using Tactics.Entities;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NavigationTiles.Examples
+namespace Tactics.Examples
 {
     public class DirectionalMovement : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace NavigationTiles.Entities
+namespace Tactics.Entities
 {
 	public class GridEntity : MonoBehaviour
 	{

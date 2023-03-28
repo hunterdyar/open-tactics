@@ -1,4 +1,4 @@
-﻿namespace NavigationTiles.Pathfinding
+﻿namespace Tactics.Pathfinding
 {
 	public interface IGraph
 	{

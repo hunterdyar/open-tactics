@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using NavigationTiles.Entities;
-using NavigationTiles.Pathfinding;
+using Tactics.Entities;
+using Tactics.Pathfinding;
 using UnityEngine;
 
-namespace NavigationTiles
+namespace Tactics
 {
 	public class NavNode : INode
 	{

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace NavigationTiles.GridShapes
+namespace Tactics.GridShapes
 {
 	[System.Serializable]
 	public class ShapeFromSet

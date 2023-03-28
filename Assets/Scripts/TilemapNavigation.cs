@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using NavigationTiles.Entities;
-using NavigationTiles.Pathfinding;
-using NavigationTiles.Utility;
+using Tactics.Entities;
+using Tactics.Pathfinding;
+using Tactics.Utility;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
@@ -16,7 +16,7 @@ using UnityEngine.Tilemaps;
 //the downside is updates at runtime. This system doesn't support fully adding/removing tiles during play yet (use walkable flag for now), but my goal is to be able to.
 //Perhaps more importantly, one can optimize a grid to remove redundant nodes, only leaving nodes where a user may turn (or stop). By having navnodes and navTiles be independent, that's a possibility.
 
-namespace NavigationTiles
+namespace Tactics
 {
 	[RequireComponent(typeof(Tilemap))]
 	public class TilemapNavigation : MonoBehaviour, IGraph

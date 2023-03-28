@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using NavigationTiles.Entities;
-using NavigationTiles.GridShapes;
+using Tactics.Entities;
+using Tactics.GridShapes;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace NavigationTiles.Highlight
+namespace Tactics.Highlight
 {
 	[RequireComponent(typeof(GridEntityPool))]
 	public class HighlighterShapeUnderMouse : MonoBehaviour
