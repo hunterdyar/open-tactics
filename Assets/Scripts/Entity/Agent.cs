@@ -41,7 +41,7 @@ namespace Tactics.Entities
 			_agentLayer.MoveEntityToNode(this,node);
 			_currentNode = node;
 			//snap... for now
-			transform.position = _currentNode.WorldPosition;
+			SnapToNode(_currentNode);
 		}
 	}
 }
