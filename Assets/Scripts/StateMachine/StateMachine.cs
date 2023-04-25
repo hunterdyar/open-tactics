@@ -10,15 +10,23 @@ namespace Tactics.StateMachine
     public class StateMachine : ScriptableObject
     {
         //Active/Gameplay
-        public State CurrentState => _stateGraphHistory.Peek();
+        public State CurrentState => GetCurrentState();
+
+        private State GetCurrentState()
+        {
+            return _stateGraphHistory?.Count == 0 ? _defaultState : _stateGraphHistory.Peek();
+        }
+
         private Stack<State> _stateGraphHistory = new Stack<State>();
 
         //Config
         public State DefaultState => _defaultState;
+        [HideInInspector,SerializeField]
         private State _defaultState;
         
         //States
-        [HideInInspector]   
+        [HideInInspector]
+        [SerializeField]
         public List<State> states = new List<State>();
 
 

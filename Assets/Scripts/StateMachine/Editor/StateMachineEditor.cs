@@ -3,6 +3,7 @@ using Tactics.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using State = Tactics.StateMachine.State;
 using StateMachine = Tactics.StateMachine.StateMachine;
 
 [CustomEditor(typeof(Tactics.StateMachine.StateMachine))]
@@ -65,35 +66,32 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 					return;
 				}
 
-				string label = element.objectReferenceValue.name;
-				EditorGUI.LabelField(rect, label, EditorStyles.boldLabel);
-
 				// Convert this element's data to a SerializedObject so we can iterate
 				// through each SerializedProperty and render a PropertyField.
 				SerializedObject nestedObject = new SerializedObject(element.objectReferenceValue);
+				bool isActiveState = _machine.CurrentState == nestedObject.targetObject;
 
-				// Loop over all properties and render them
-				// SerializedProperty prop = nestedObject.GetIterator();
-				// float y = rect.y;
-				// while (prop.NextVisible(true))
-				// {
-				// 	if (prop.name == "m_Script")
-				// 	{
-				// 		continue;
-				// 	}
-				// 	Debug.Log(prop.type);
-				// 	if (prop.type == "UnityEvent" || prop.type == "PersistentCallGroup")
-				// 	{
-				// 		continue;
-				// 	}
-				//
-				// 	rect.y += EditorGUIUtility.singleLineHeight;
-				// 	EditorGUI.PropertyField(rect, prop);
-				// }
+				string label = (!isActiveState) ? element.objectReferenceValue.name : (element.objectReferenceValue.name + " (current)");
+				EditorGUI.LabelField(rect, label, EditorStyles.boldLabel);
+
+				
 				var nameProp = nestedObject.FindProperty("stateName");
 				rect.y += EditorGUIUtility.singleLineHeight;
 				EditorGUI.PropertyField(rect, nameProp);
+
 				
+				if (EditorApplication.isPlaying && !isActiveState)
+				{
+					rect.y += EditorGUIUtility.singleLineHeight;
+					if (GUI.Button(rect,"Enter")) 
+					{
+						_machine.EnterState((Tactics.StateMachine.State)nestedObject.targetObject);
+					}
+					// if (EditorGUI.LinkButton(rect, "enter state"))
+					// {
+					// 		_machine.EnterState((Tactics.StateMachine.State)nestedObject.targetObject);
+					// }
+				}
 
 				nestedObject.ApplyModifiedProperties();
 
@@ -113,10 +111,14 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 				SerializedProperty element = statesProp.GetArrayElementAtIndex(index);
 				if (element.objectReferenceValue != null)
 				{
-					SerializedObject ability = new SerializedObject(element.objectReferenceValue);
-					
 					//+1 for the name Label
 					additionalProps += EditorGUIUtility.singleLineHeight;
+
+
+					if (EditorApplication.isPlaying && _machine.CurrentState != (State)element.objectReferenceValue)
+					{
+						additionalProps += EditorGUIUtility.singleLineHeight;
+					}
 				}
 
 				float spacingBetweenElements = EditorGUIUtility.singleLineHeight / 2;
@@ -128,14 +130,6 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 			{
 				var s = target as StateMachine;
 				s.AddElement<Tactics.StateMachine.State>(statesProp, "New State");
-				
-				//first created state should be the default.
-				//todo: this isn't working until assetdatabase gets refreshed or something like that.
-				//Instead, we should do OnValidate
-				// if (s.states.Count == 1)
-				// {
-				// 	s.SetDefaultState(s.states[0]);
-				// }
 			};
 			
 		}
