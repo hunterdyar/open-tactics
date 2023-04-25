@@ -18,6 +18,7 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 
 		public void OnEnable()
 		{
+			Undo.undoRedoPerformed += UndoRedoPerformed;
 			_machine = (target as StateMachine);
 			statesProp = serializedObject.FindProperty("states");
 			stateList = new ReorderableList(
@@ -139,7 +140,10 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 			
 		}
 
-
+		private void OnDisable()
+		{
+			Undo.undoRedoPerformed += UndoRedoPerformed;
+		}
 
 		public override void OnInspectorGUI()
 		{
@@ -169,4 +173,11 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 
 			serializedObject.ApplyModifiedProperties();
 		}
+
+		private void UndoRedoPerformed()
+		{
+			// Debug.Log("Undo Redo Performed");
+		}
+
+		
 	}

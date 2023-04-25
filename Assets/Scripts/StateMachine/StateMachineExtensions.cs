@@ -33,6 +33,7 @@ namespace Tactics.StateMachine
 			SerializedProperty lastElement = listProperty.GetArrayElementAtIndex(listProperty.arraySize - 1);
 			lastElement.objectReferenceValue = element;
 			
+			AssetDatabase.SaveAssetIfDirty(scriptableObject);
 		}
 
 		public static void RemoveElement<T>(this ScriptableObject scriptableObject, int index, SerializedProperty listProperty) where T : ScriptableObject
@@ -62,7 +63,8 @@ namespace Tactics.StateMachine
 			
 			var reff = elementProperty.objectReferenceValue;
 			listProperty.DeleteArrayElementAtIndex((int)index);
-
+			
+			
 			Undo.DestroyObjectImmediate(reff);
 			
 			AssetDatabase.SaveAssets();
@@ -70,6 +72,7 @@ namespace Tactics.StateMachine
 
 			Undo.CollapseUndoOperations(group);
 
+			AssetDatabase.SaveAssetIfDirty(scriptableObject);
 			// AssetDatabase.SaveAssets();
 			// AssetDatabase.Refresh();
 
