@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Tactics.StateMachine
+namespace HDyar.SimpleSOStateMachine
 {
 	/// <summary>
 	/// Utility MonoBehaviour Registers itself as a listener to a state, and exposes virtual OnEnterState and OnExitState functions to override.

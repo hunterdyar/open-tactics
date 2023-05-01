@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-namespace Tactics.StateMachine
+namespace HDyar.SimpleSOStateMachine
 {
     [CreateAssetMenu(fileName = "Machine", menuName = "State Machine/State Machine", order = 0)]
     public class StateMachine : ScriptableObject

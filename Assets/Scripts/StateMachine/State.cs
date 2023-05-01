@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Tactics.StateMachine
+namespace HDyar.SimpleSOStateMachine
 {
 	public class State : ScriptableObject
 	{

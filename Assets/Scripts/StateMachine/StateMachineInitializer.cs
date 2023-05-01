@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Tactics.StateMachine
+namespace HDyar.SimpleSOStateMachine
 {
 	public class StateMachineInitializer : MonoBehaviour
 	{

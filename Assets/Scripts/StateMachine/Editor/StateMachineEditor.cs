@@ -1,12 +1,11 @@
 ﻿using System;
-using Tactics.StateMachine;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using State = Tactics.StateMachine.State;
-using StateMachine = Tactics.StateMachine.StateMachine;
+using State = HDyar.SimpleSOStateMachine.State;
+using StateMachine = HDyar.SimpleSOStateMachine.StateMachine;
 
-[CustomEditor(typeof(Tactics.StateMachine.StateMachine))]
+[CustomEditor(typeof(HDyar.SimpleSOStateMachine.StateMachine))]
 	public class StateMachineEditor : Editor
 	{
 		private ReorderableList stateList;
@@ -40,7 +39,7 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 				var element = list.serializedProperty.GetArrayElementAtIndex(list.index);
 				//todo: error handling
 				
-				_machine.RemoveElement<Tactics.StateMachine.State>(list.index,statesProp);
+				RemoveStateAsset(list.index,statesProp);
 				ReorderableList.defaultBehaviours.DoRemoveButton(list);
 				
 				//todo: testing this
@@ -85,12 +84,9 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 					rect.y += EditorGUIUtility.singleLineHeight;
 					if (GUI.Button(rect,"Enter")) 
 					{
-						_machine.EnterState((Tactics.StateMachine.State)nestedObject.targetObject);
+						_machine.EnterState((State)nestedObject.targetObject);
 					}
-					// if (EditorGUI.LinkButton(rect, "enter state"))
-					// {
-					// 		_machine.EnterState((Tactics.StateMachine.State)nestedObject.targetObject);
-					// }
+					
 				}
 
 				nestedObject.ApplyModifiedProperties();
@@ -128,8 +124,9 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 
 			stateList.onAddCallback = (ReorderableList list) =>
 			{
-				var s = target as StateMachine;
-				s.AddElement<Tactics.StateMachine.State>(statesProp, "New State");
+				AddStateAsset(statesProp,"New State");
+				// var s = target as StateMachine;
+				// s.AddElement<State>(statesProp, "New State");
 			};
 			
 		}
@@ -173,5 +170,75 @@ using StateMachine = Tactics.StateMachine.StateMachine;
 			// Debug.Log("Undo Redo Performed");
 		}
 
-		
+		public void AddStateAsset(SerializedProperty listProperty, string name = "Element", HideFlags hideFlags = HideFlags.None)
+		{
+			if (!listProperty.isArray)
+				throw new System.Exception("\"listProperty\" is not a List.");
+
+			State element = ScriptableObject.CreateInstance<State>();
+
+			element.name = name;
+			element.hideFlags = hideFlags;
+
+			//todo: un-generic this whole function
+			if (element is { } state)
+			{
+				state.stateName = name;
+			}
+			
+			string scriptableObjectPath = AssetDatabase.GetAssetPath(_machine);
+
+			AssetDatabase.AddObjectToAsset(element, scriptableObjectPath);
+			AssetDatabase.SaveAssets();
+
+			Undo.RegisterCreatedObjectUndo(element, "Add element to ScriptableObject");
+
+			listProperty.InsertArrayElementAtIndex(listProperty.arraySize);
+			SerializedProperty lastElement = listProperty.GetArrayElementAtIndex(listProperty.arraySize - 1);
+			lastElement.objectReferenceValue = element;
+			
+			AssetDatabase.SaveAssetIfDirty(_machine);
+		}
+
+		public void RemoveStateAsset(int index, SerializedProperty listProperty)
+		{
+			if (!listProperty.isArray)
+			{
+				throw new System.Exception("\"listProperty\" is not a List.");
+			}
+
+			if (index < 0 || index > listProperty.arraySize - 1)
+			{
+				throw new System.Exception("\"index\" out of range.");
+			}
+
+			if (listProperty.arraySize == 0)
+			{
+				return;
+			}
+
+			SerializedProperty elementProperty = listProperty.GetArrayElementAtIndex(index);
+
+			//Undo
+			Undo.SetCurrentGroupName("Remove element from ScriptableObject");
+			int group = Undo.GetCurrentGroup();
+
+			Undo.RecordObject(listProperty.serializedObject.targetObject, "");
+			
+			var reff = elementProperty.objectReferenceValue;
+			listProperty.DeleteArrayElementAtIndex((int)index);
+			
+			
+			Undo.DestroyObjectImmediate(reff);
+			
+			AssetDatabase.SaveAssets();
+			AssetDatabase.Refresh();
+
+			Undo.CollapseUndoOperations(group);
+
+			AssetDatabase.SaveAssetIfDirty(_machine);
+			// AssetDatabase.SaveAssets();
+			// AssetDatabase.Refresh();
+
+		}
 	}

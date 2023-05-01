@@ -1,8 +1,6 @@
-﻿using System;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Tactics.StateMachine
+namespace HDyar.SimpleSOStateMachine
 {
 	public class ActiveSelfWithState : MonoBehaviour, IStateListener
 	{

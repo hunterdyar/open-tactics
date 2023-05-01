@@ -1,4 +1,4 @@
-﻿namespace Tactics.StateMachine
+﻿namespace HDyar.SimpleSOStateMachine
 {
 	public interface IStateListener
 	{
